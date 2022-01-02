@@ -21,8 +21,22 @@ function computerPlay() {
     return moveString;
 }
 
-function playerMove () {
-    
+function formatPlayerSelection(playerSelection) {
+    playerSelection = playerSelection.toLowerCase();
+    playerSelection = playerSelection.charAt(0).toUpperCase() 
+        + playerSelection.slice(1);
+
+    return playerSelection;
 }
 
-console.log(computerPlay());
+
+function playRound (playerSelection, computerSelection)
+{
+    playerSelection = formatPlayerSelection(playerSelection);
+}
+
+// playerSelection = prompt("Please enter your move.");
+
+console.log(formatPlayerSelection("pApEr"));
+
+
