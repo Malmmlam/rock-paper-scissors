@@ -29,87 +29,92 @@ function computerPlay() {
     return moveString;
 }
 
-function playRound (playerSelection, computerSelection)
+
+
+const buttons = document.querySelectorAll('button');
+buttons.forEach(buttonPress)
+
+function buttonPress(button) {
+    button.addEventListener('click', () => {
+        scoreTracker(playRound(button.id))
+    });
+
+}
+
+const output = document.querySelector('#output');
+
+
+function playRound (playerSelection)
 {
     playerSelection = formatPlayerSelection(playerSelection);
-    let message
+    let computerSelection = computerPlay();
+    let message;
+
 
     if(playerSelection === "Rock" && computerSelection === "Paper") {
         message = "Player choose rock and Computer choose paper. Computer Wins!";
-        console.log(message);
-        return message;
+        output.innerHTML = message;
+        return 1;
     }
     else if(playerSelection === "Paper" && computerSelection === "Rock") {
-         message = "Player choose paper and Computer choose rock. Player Wins!";
-         console.log(message);
-         return message;
+        message = "Player choose paper and Computer choose rock. Player Wins!";
+        output.innerHTML = message;
+        return 2;
     }
     else if(playerSelection === "Rock" && computerSelection === "Scissors") {
         message = "Player choose rock and Computer choose scissors. Player Wins!";
-        console.log(message);
-        return message;
+        output.innerHTML = message;
+        return 2;
     }
     else if(playerSelection === "Scissors" && computerSelection === "Rock") {
         message = "Player choose scissors and Computer choose rock. Computer Wins!";
-        console.log(message);
-        return message;
+        output.innerHTML = message;
+        return 1;
     }
     else if(playerSelection === "Scissors" && computerSelection === "Paper") {
         message = "Player choose scissors and Computer choose paper. Player Wins!";
-        console.log(message);
-        return message;
+        output.innerHTML = message;
+        return 2;
     }
     else if(playerSelection === "Paper" && computerSelection === "Scissors") {
         message = "Player choose Paper and Computer choose Scissors. Computer Wins!";
-        console.log(message);
-        return message;
+        output.innerHTML = message;
+        return 1;
     }
     else if(playerSelection === computerSelection) {
         message = "Player and computer choose the same. The game is a tie.";
-        console.log(message);
-        return message;
+        output.innerHTML = message;
+        return 3;
     }
 }
 
-function game() {
-    
-    let playCounter;
-    let playerScore = 0;
-    let computerScore = 0;
-    
+const computerScore = document.querySelector('#computer-score');
+const playerScore = document.querySelector('#player-score');
+const announcement = document.querySelector('#winner');
 
+computerScore.innerHTML = 0;
+playerScore.innerHTML = 0
 
-    for(playCounter = 0; playCounter < 5; playCounter++) {
-
-        let playerSelection = prompt("Please enter your move.")
-        let computerSelection = computerPlay();
-        
-        if(playRound(playerSelection, computerSelection).endsWith("Computer Wins!")) {
-            computerScore++;
-            console.log(`Computer won this round. Computer Score: ${computerScore}, Player Score: ${playerScore}`);
-        }
-        else if(playRound(playerSelection, computerSelection).endsWith("Player Wins!")) {
-            playerScore++;
-            console.log(`Player won this round. Computer Score: ${computerScore}, Player Score: ${playerScore}`);
-        }
-        else if(playRound(playerSelection, computerSelection).endsWith("The game is a tie.")) {
-            computerScore++;
-            playerScore++;
-            console.log(`This round was a tie. Computer Score ${computerScore}, Player Score ${playerScore}`)
-        }
+function scoreTracker(num) {
+    if(num === 1) {
+        computerScore.innerHTML++;
+    } else if(num === 2) {
+        playerScore.innerHTML++;
+    } else if(num === 3) {
+        computerScore.innerHTML++;
+        playerScore.innerHTML++;
     }
 
-    if(computerScore > playerScore) {
-        return "Computer Wins!"
-    } 
-    else if(playerScore > computerScore) {
-        return "Player Wins!"
-    }
-    else {
-        return "The game is a tie."
+    if(parseInt(computerScore.innerHTML) === 5 && parseInt(playerScore.innerHTML) < 5) {
+        announcement.innerHTML = "Computer Wins!";
+    } else if(parseInt(playerScore.innerHTML) === 5 && parseInt(computerScore.innerHTML) < 5) {
+        announcement.innerHTML = "Player Wins!";
+    } else if(parseInt(playerScore.innerHTML) === 5 && parseInt(computerScore.innerHTML) === 5) {
+        announcement.innerHTML = "It's a tie!"
     }
 }
 
-console.log(game());
+
+
 
 

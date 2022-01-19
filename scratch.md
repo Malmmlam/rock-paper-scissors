@@ -6,3 +6,10 @@ function playRound (playerSelection, computerSelection) {
     else if either playerSelection or computerSelection has "Paper" and the other has "Scissors", the one with "Scissors" wins. Return "Scissors beats paper" and winner. 
     else it is a tie.
 }
+
+function playerSelection(e) {
+
+    if the button pressed is rock return rock,
+    if the button pressed is paper return paper,
+    if the button pressed is scissors return scissors
+}
